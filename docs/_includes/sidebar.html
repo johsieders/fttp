@@ -1,5 +1,9 @@
 {% assign sidebar = site.data.sidebars[page.sidebar].entries %}
-{% assign pageurl = page.url  | remove: ".html" %}
+{% if page.url == "/" %}
+{% assign pageurl = page.url %}
+{% else %}
+{% assign pageurl = page.url | remove_first: "/" %}
+{% endif %}
 
 <ul id="mysidebar" class="nav">
   <li class="sidebarTitle">{{sidebar[0].product}} {{sidebar[0].version}}</li>
