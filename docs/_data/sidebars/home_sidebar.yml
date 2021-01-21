@@ -10,7 +10,7 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Iterator Basics
+      title: Title
       url: iterators1.html
     - output: web,pdf
       title: Binary Trees
