@@ -1,7 +1,7 @@
 {
   "fttp": {
     "Overview": "/",
-    "Title": "iterators1.html",
+    "Iterators and Iterables": "iterators1.html",
     "Binary Trees": "iterators2.html",
     "Conjoin": "iterators3.html"
   }
