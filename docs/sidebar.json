@@ -2,6 +2,7 @@
   "fttp": {
     "Overview": "/",
     "Iterators and Iterables": "iterators1.html",
+    "Warming Up": "warmingup.html",
     "Binary Trees": "iterators2.html",
     "Conjoin": "iterators3.html"
   }

@@ -13,6 +13,9 @@ entries:
       title: Iterators and Iterables
       url: iterators1.html
     - output: web,pdf
+      title: Warming Up
+      url: warmingup.html
+    - output: web,pdf
       title: Binary Trees
       url: iterators2.html
     - output: web,pdf
