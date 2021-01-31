@@ -10,17 +10,38 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Iterators and Iterables
-      url: iterators1.html
-    - output: web,pdf
       title: Warming Up
       url: warmingup.html
+    - output: web,pdf
+      title: Collections
+      url: collections.html
+    - output: web,pdf
+      title: Functions
+      url: functions.html
+    - output: web,pdf
+      title: Classes
+      url: 04-classes.html
+    - output: web,pdf
+      title: Sorting
+      url: sorting.html
+    - output: web,pdf
+      title: Iterators and Iterables
+      url: iterators1.html
     - output: web,pdf
       title: Binary Trees
       url: iterators2.html
     - output: web,pdf
+      title: Searching
+      url: searching1.html
+    - output: web,pdf
       title: Conjoin
-      url: iterators3.html
+      url: seraching2.html
+    - output: web,pdf
+      title: Intervals and Time Series
+      url: intervals.html
+    - output: web,pdf
+      title: Interpreters
+      url: interpreters.html
     output: web
     title: fttp
   output: web

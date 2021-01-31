@@ -1,9 +1,16 @@
 {
   "fttp": {
     "Overview": "/",
-    "Iterators and Iterables": "iterators1.html",
     "Warming Up": "warmingup.html",
+    "Collections": "collections.html",
+    "Functions": "functions.html",
+    "Classes": "04-classes.html",
+    "Sorting": "sorting.html",
+    "Iterators and Iterables": "iterators1.html",
     "Binary Trees": "iterators2.html",
-    "Conjoin": "iterators3.html"
+    "Searching": "searching1.html",
+    "Conjoin": "seraching2.html",
+    "Intervals and Time Series": "intervals.html",
+    "Interpreters": "interpreters.html"
   }
 }
