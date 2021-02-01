@@ -31,7 +31,7 @@ nb_path: "nbs\.ipynb_checkpoints\01_warmingup-checkpoint.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We use fastai's test library. xx</p>
+<p>We use fastai's test library. Our tests always preceed the implementation(s). They should silently go through.</p>
 
 </div>
 </div>
@@ -61,14 +61,34 @@ nb_path: "nbs\.ipynb_checkpoints\01_warmingup-checkpoint.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a function <code>powerOf2(n: int) -&gt; bool</code> which returns true iff  n is a power of 2</li>
-<li>Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. Subtracting 1 replaces the leading one with zero and the zeros by one: 8 - 1 = 7 = 0b111.  </li>
-</ul>
+<p>Write a function <code>powerOf2(n: int) -&gt; bool</code> which returns true iff  n is a power of 2
+Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. Subtracting 1 replaces the leading one with zero and the zeros by one: 8 - 1 = 7 = 0b111.</p>
+<p>Here is what <code>powerOf2</code> is supposed to do.</p>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_powerOf2</span><span class="p">():</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">powerOf2</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">powerOf2</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">powerOf2</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">powerOf2</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -102,10 +122,7 @@ nb_path: "nbs\.ipynb_checkpoints\01_warmingup-checkpoint.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_eq</span><span class="p">(</span><span class="n">powerOf2</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">powerOf2</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">powerOf2</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">powerOf2</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_powerOf2</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -117,13 +134,33 @@ nb_path: "nbs\.ipynb_checkpoints\01_warmingup-checkpoint.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a function <code>log2(n: int) -&gt; int</code> which returns the number of binary digits of n minus one</li>
-</ul>
+<p>Write a function <code>log2(n: int) -&gt; int</code> which returns the number of binary digits of n minus one</p>
+<p>Here is what <code>log2</code> is supposed to do.</p>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_log2</span><span class="p">():</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -164,10 +201,7 @@ nb_path: "nbs\.ipynb_checkpoints\01_warmingup-checkpoint.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_eq</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_log2</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -179,10 +213,8 @@ nb_path: "nbs\.ipynb_checkpoints\01_warmingup-checkpoint.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a function <code>gcd(a: int, b: int) -&gt; int</code> which returns the greatest common divisor of a and b</li>
-<li>How do you deal with negative or zero arguments?</li>
-</ul>
+<p>Write a function <code>gcd(a: int, b: int) -&gt; int</code> which returns the greatest common divisor of a and b.
+How do you deal with negative or zero arguments?</p>
 
 </div>
 </div>
@@ -241,10 +273,7 @@ nb_path: "nbs\.ipynb_checkpoints\01_warmingup-checkpoint.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a recursive function <code>gcd1(a: int, b: int) -&gt; int</code> which returns the greatest common divisor of a and b</li>
-<li>How do you deal with negative or zero arguments?</li>
-</ul>
+<p>Write a recursive function <code>gcd1(a: int, b: int) -&gt; int</code> which returns the greatest common divisor of a and b. How deep is the call stack?</p>
 
 </div>
 </div>
@@ -296,12 +325,10 @@ nb_path: "nbs\.ipynb_checkpoints\01_warmingup-checkpoint.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>We consider half-open intervals such as u = [a, b) given as a tuple <code>(a, b)</code>.
+<p>We consider half-open intervals such as u = [a, b) given as a tuple <code>(a, b)</code>.
 Write a function <code>intersection(u: (int, int), v: (int, int)) -&gt; (int, int)</code>
-which returns the intersection of the intervals <code>u</code> and <code>v</code>.</li>
-<li>Question: How do you manage the empty interval?</li>
-</ul>
+which returns the intersection of the intervals <code>u</code> and <code>v</code>.
+Question: How do you manage the empty interval?</p>
 
 </div>
 </div>
@@ -315,8 +342,8 @@ which returns the intersection of the intervals <code>u</code> and <code>v</code
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_intersection</span><span class="p">():</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">intersection</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">intersection</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">intersection</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">intersection</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>    <span class="c1"># empty interval</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">intersection</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>    <span class="c1"># empty interval</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">intersection</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 </pre></div>
 
@@ -644,6 +671,38 @@ which returns the intersection of the intervals <code>u</code> and <code>v</code
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_reverse_in_place</span><span class="p">():</span>
+    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+
+    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+
+    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+
+    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 <details class="description">
       <summary data-open="Hide Code" data-close="Show Code"></summary>
         <summary></summary>
@@ -678,22 +737,7 @@ which returns the intersection of the intervals <code>u</code> and <code>v</code
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_reverse_in_place</span><span class="p">():</span>
-<span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-<span class="n">xs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
-
-<span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">xs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
-
-<span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">xs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
-
-<span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">xs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_reverse_in_place</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -713,6 +757,27 @@ which returns the intersection of the intervals <code>u</code> and <code>v</code
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_reverse</span><span class="p">():</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">reverse1</span><span class="p">([]),</span> <span class="p">[])</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">reverse1</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">reverse1</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">reverse1</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -748,13 +813,29 @@ which returns the intersection of the intervals <code>u</code> and <code>v</code
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_eq</span><span class="p">(</span><span class="n">reverse1</span><span class="p">([]),</span> <span class="p">[])</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">reverse1</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">reverse1</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">reverse1</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_reverse</span><span class="p">()</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-32-7681283dfdda&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>test_reverse<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+
+<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;test_reverse&#39; is not defined</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -811,6 +892,39 @@ which returns the intersection of the intervals <code>u</code> and <code>v</code
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_palindrome</span><span class="p">(</span><span class="o">*</span><span class="n">implementations</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">implementations</span><span class="p">:</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;xx&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;xy&quot;</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Reittier&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Reliefpfeiler&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Risotto, Sir?&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Madam, I&#39;m Adam&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Liese, tu Gutes, eil!&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Grub Nero nie in Orenburg?&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;O Genie, der Herr ehre dein Ego!&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Lewd I did live, &amp; evil did I dwel?&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Eine treue Familie bei Lima feuerte nie&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Mad Zeus, no live devil, lived evil on Suez dam&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Straw? No, too stupid a fad. I put soot on warts.&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -931,22 +1045,7 @@ which returns the intersection of the intervals <code>u</code> and <code>v</code
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">palindrome</span><span class="p">,</span> <span class="n">palindrome1</span><span class="p">,</span> <span class="n">palindrome2</span><span class="p">]:</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;xx&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;xy&quot;</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Reittier&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Reliefpfeiler&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Risotto, Sir?&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Madam, I&#39;m Adam&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Liese, tu Gutes, eil!&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Grub Nero nie in Orenburg?&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;O Genie, der Herr ehre dein Ego!&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Lewd I did live, &amp; evil did I dwel?&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Eine treue Familie bei Lima feuerte nie&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Mad Zeus, no live devil, lived evil on Suez dam&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Straw? No, too stupid a fad. I put soot on warts.&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_palindrome</span><span class="p">(</span><span class="n">palindrome</span><span class="p">,</span> <span class="n">palindrome1</span><span class="p">,</span> <span class="n">palindrome2</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -974,6 +1073,30 @@ which returns the intersection of the intervals <code>u</code> and <code>v</code
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_romans</span><span class="p">(</span><span class="o">*</span><span class="n">implementations</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">implementations</span><span class="p">:</span>
+        <span class="n">rs</span> <span class="o">=</span> <span class="n">r</span><span class="p">()</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rs</span><span class="p">),</span> <span class="mi">5000</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;I&#39;</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="s1">&#39;IX&#39;</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">4999</span><span class="p">],</span> <span class="s1">&#39;MMMMCMXCIX&#39;</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 <details class="description">
       <summary data-open="Hide Code" data-close="Show Code"></summary>
         <summary></summary>
@@ -987,17 +1110,63 @@ which returns the intersection of the intervals <code>u</code> and <code>v</code
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :return: romans numbers from 1 to 4999</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">digits0</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;II&#39;</span><span class="p">,</span> <span class="s1">&#39;III&#39;</span><span class="p">,</span> <span class="s1">&#39;IV&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;VI&#39;</span><span class="p">,</span> <span class="s1">&#39;VII&#39;</span><span class="p">,</span> <span class="s1">&#39;VIII&#39;</span><span class="p">,</span> <span class="s1">&#39;IX&#39;</span><span class="p">]</span>
-    <span class="n">digits1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;XX&#39;</span><span class="p">,</span> <span class="s1">&#39;XXX&#39;</span><span class="p">,</span> <span class="s1">&#39;XL&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;LX&#39;</span><span class="p">,</span> <span class="s1">&#39;LXX&#39;</span><span class="p">,</span> <span class="s1">&#39;LXXX&#39;</span><span class="p">,</span> <span class="s1">&#39;XC&#39;</span><span class="p">]</span>
-    <span class="n">digits2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;CC&#39;</span><span class="p">,</span> <span class="s1">&#39;CCC&#39;</span><span class="p">,</span> <span class="s1">&#39;CD&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;DC&#39;</span><span class="p">,</span> <span class="s1">&#39;DCC&#39;</span><span class="p">,</span> <span class="s1">&#39;DCCC&#39;</span><span class="p">,</span> <span class="s1">&#39;CM&#39;</span><span class="p">]</span>
-    <span class="n">digits3</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;MM&#39;</span><span class="p">,</span> <span class="s1">&#39;MMM&#39;</span><span class="p">,</span> <span class="s1">&#39;MMMM&#39;</span><span class="p">]</span>
-
+    <span class="n">digits0</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;MM&#39;</span><span class="p">,</span> <span class="s1">&#39;MMM&#39;</span><span class="p">,</span> <span class="s1">&#39;MMMM&#39;</span><span class="p">]</span>
+    <span class="n">digits1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;CC&#39;</span><span class="p">,</span> <span class="s1">&#39;CCC&#39;</span><span class="p">,</span> <span class="s1">&#39;CD&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;DC&#39;</span><span class="p">,</span> <span class="s1">&#39;DCC&#39;</span><span class="p">,</span> <span class="s1">&#39;DCCC&#39;</span><span class="p">,</span> <span class="s1">&#39;CM&#39;</span><span class="p">]</span>
+    <span class="n">digits2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;XX&#39;</span><span class="p">,</span> <span class="s1">&#39;XXX&#39;</span><span class="p">,</span> <span class="s1">&#39;XL&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;LX&#39;</span><span class="p">,</span> <span class="s1">&#39;LXX&#39;</span><span class="p">,</span> <span class="s1">&#39;LXXX&#39;</span><span class="p">,</span> <span class="s1">&#39;XC&#39;</span><span class="p">]</span>
+    <span class="n">digits3</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;II&#39;</span><span class="p">,</span> <span class="s1">&#39;III&#39;</span><span class="p">,</span> <span class="s1">&#39;IV&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;VI&#39;</span><span class="p">,</span> <span class="s1">&#39;VII&#39;</span><span class="p">,</span> <span class="s1">&#39;VIII&#39;</span><span class="p">,</span> <span class="s1">&#39;IX&#39;</span><span class="p">]</span>
+   
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">d3</span> <span class="ow">in</span> <span class="n">digits3</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">d2</span> <span class="ow">in</span> <span class="n">digits2</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">d1</span> <span class="ow">in</span> <span class="n">digits1</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">d0</span> <span class="ow">in</span> <span class="n">digits0</span><span class="p">:</span>
-                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d3</span> <span class="o">+</span> <span class="n">d2</span> <span class="o">+</span> <span class="n">d1</span> <span class="o">+</span> <span class="n">d0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">d0</span> <span class="ow">in</span> <span class="n">digits0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">d1</span> <span class="ow">in</span> <span class="n">digits1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">d2</span> <span class="ow">in</span> <span class="n">digits2</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">d3</span> <span class="ow">in</span> <span class="n">digits3</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d0</span> <span class="o">+</span> <span class="n">d1</span> <span class="o">+</span> <span class="n">d2</span> <span class="o">+</span> <span class="n">d3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following implementation is slightly more elegant. It is the starting point of the conjoin pattern (see xxx).</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary data-open="Hide Code" data-close="Show Code"></summary>
+        <summary></summary>
+        <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="k">def</span> <span class="nf">romans1</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :return: romans numbers from 1 to 4999</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">digits0</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;MM&#39;</span><span class="p">,</span> <span class="s1">&#39;MMM&#39;</span><span class="p">,</span> <span class="s1">&#39;MMMM&#39;</span><span class="p">]</span>
+    <span class="n">digits1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;CC&#39;</span><span class="p">,</span> <span class="s1">&#39;CCC&#39;</span><span class="p">,</span> <span class="s1">&#39;CD&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;DC&#39;</span><span class="p">,</span> <span class="s1">&#39;DCC&#39;</span><span class="p">,</span> <span class="s1">&#39;DCCC&#39;</span><span class="p">,</span> <span class="s1">&#39;CM&#39;</span><span class="p">]</span>
+    <span class="n">digits2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;XX&#39;</span><span class="p">,</span> <span class="s1">&#39;XXX&#39;</span><span class="p">,</span> <span class="s1">&#39;XL&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;LX&#39;</span><span class="p">,</span> <span class="s1">&#39;LXX&#39;</span><span class="p">,</span> <span class="s1">&#39;LXXX&#39;</span><span class="p">,</span> <span class="s1">&#39;XC&#39;</span><span class="p">]</span>
+    <span class="n">digits3</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;II&#39;</span><span class="p">,</span> <span class="s1">&#39;III&#39;</span><span class="p">,</span> <span class="s1">&#39;IV&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;VI&#39;</span><span class="p">,</span> <span class="s1">&#39;VII&#39;</span><span class="p">,</span> <span class="s1">&#39;VIII&#39;</span><span class="p">,</span> <span class="s1">&#39;IX&#39;</span><span class="p">]</span>
+   
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">number</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">digits0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">number</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">digits1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">number</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">digits2</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">number</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">in</span> <span class="n">digits3</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">number</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">result</span>
 </pre></div>
 
@@ -1016,12 +1185,7 @@ which returns the intersection of the intervals <code>u</code> and <code>v</code
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rs</span> <span class="o">=</span> <span class="n">romans</span><span class="p">()</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rs</span><span class="p">),</span> <span class="mi">5000</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;I&#39;</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="s1">&#39;IX&#39;</span><span class="p">)</span>
-<span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">4999</span><span class="p">],</span> <span class="s1">&#39;MMMMCMXCIX&#39;</span> <span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_romans</span><span class="p">(</span><span class="n">romans</span><span class="p">,</span> <span class="n">romans1</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1046,6 +1210,28 @@ which returns the intersection of the intervals <code>u</code> and <code>v</code
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_bico</span><span class="p">(</span><span class="o">*</span><span class="n">implementations</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">implementations</span><span class="p">:</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">b</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">b</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">b</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">b</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1133,11 +1319,7 @@ which returns the intersection of the intervals <code>u</code> and <code>v</code
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="p">[</span><span class="n">bico</span><span class="p">,</span> <span class="n">bico1</span><span class="p">]:</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">b</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">b</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">b</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">b</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_bico</span><span class="p">(</span><span class="n">bico</span><span class="p">,</span> <span class="n">bico1</span><span class="p">)</span>
 </pre></div>
 
     </div>
