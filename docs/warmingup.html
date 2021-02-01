@@ -43,7 +43,11 @@ nb_path: "nbs\01_warmingup.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastcore.test</span> <span class="kn">import</span> <span class="n">test_eq</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">info</span> <span class="o">=</span> <span class="o">!</span>pip show nbdev
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">info</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="o">!</span>pip install nbdev
+    
+<span class="kn">from</span> <span class="nn">fastcore.test</span> <span class="kn">import</span> <span class="n">test_eq</span>
 </pre></div>
 
     </div>
@@ -55,13 +59,13 @@ nb_path: "nbs\01_warmingup.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Some-very-short-functions">Some very short functions<a class="anchor-link" href="#Some-very-short-functions"> </a></h2>
+<h2 id="Some-Very-Short-Functions">Some Very Short Functions<a class="anchor-link" href="#Some-Very-Short-Functions"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Write a function <code>powerOf2(n: int) -&gt; bool</code> which returns true iff  n is a power of 2
+<p>Write a function <code>powerOf2(n: int) -&gt; bool</code> which returns true iff  n is a power of 2.
 Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. Subtracting 1 replaces the leading one with zero and the zeros by one: 8 - 1 = 7 = 0b111.</p>
 <p>Here is what <code>powerOf2</code> is supposed to do.</p>
 
@@ -134,7 +138,7 @@ Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. S
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Write a function <code>log2(n: int) -&gt; int</code> which returns the number of binary digits of n minus one</p>
+<p>Write a function <code>log2(n: int) -&gt; int</code> which returns the number of binary digits of n minus 1.</p>
 <p>Here is what <code>log2</code> is supposed to do.</p>
 
 </div>
@@ -327,7 +331,7 @@ How do you deal with negative or zero arguments?</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We consider half-open intervals such as u = [a, b) given as a tuple <code>(a, b)</code>.
 Write a function <code>intersection(u: (int, int), v: (int, int)) -&gt; (int, int)</code>
-which returns the intersection of the intervals <code>u</code> and <code>v</code>.
+which returns the intersection of the intervals <code>u</code> and <code>v</code>. Hint: This is a one-liner. No if, no else.
 Question: How do you manage the empty interval?</p>
 
 </div>
@@ -382,6 +386,13 @@ Question: How do you manage the empty interval?</p>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Our choice for the emtpy interval: An interval is empty if lower bound $\geq$ upper bound. This makes our program so simple.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -401,15 +412,13 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Faculty-and-Fibonacci,-to-recurse-or-not-to-recurse?">Faculty and Fibonacci, to recurse or not to recurse?<a class="anchor-link" href="#Faculty-and-Fibonacci,-to-recurse-or-not-to-recurse?"> </a></h2>
+<h2 id="Faculty-and-Fibonacci,-to-Recurse-or-not-to-Recurse?">Faculty and Fibonacci, to Recurse or not to Recurse?<a class="anchor-link" href="#Faculty-and-Fibonacci,-to-Recurse-or-not-to-Recurse?"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a non-recursive function <code>faculty(n: int) -&gt; int</code> which returns n!.</li>
-</ul>
+<p>Write a non-recursive function <code>faculty(n: int) -&gt; int</code> which returns n!.</p>
 
 </div>
 </div>
@@ -471,10 +480,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a recursive function <code>faculty1(n: int) -&gt; int</code> which returns n!.</li>
-<li>How deep is the call stack?</li>
-</ul>
+<p>Write a recursive function <code>faculty1(n: int) -&gt; int</code> which returns n!. How deep is the call stack?</p>
 
 </div>
 </div>
@@ -530,9 +536,14 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a function <code>fibo(n: int) -&gt; int</code> which returns the n-th fibonacci number</li>
-</ul>
+<p>The call stack is $O(n)$. This is no problem because $n!$ can only be computed for small $n$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Write a function <code>fibo(n: int) -&gt; int</code> which returns the n-th fibonacci number</p>
 
 </div>
 </div>
@@ -596,10 +607,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a recursive function <code>fibo(n: int) -&gt; int</code> which returns the n-th fibonacci number.</li>
-<li>How deep is the call stack?</li>
-</ul>
+<p>Write a recursive function <code>fibo(n: int) -&gt; int</code> which returns the n-th fibonacci number. How deep is the call stack?</p>
 
 </div>
 </div>
@@ -655,7 +663,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Reversing-and-palindromes">Reversing and palindromes<a class="anchor-link" href="#Reversing-and-palindromes"> </a></h2>
+<h2 id="Palindromes">Palindromes<a class="anchor-link" href="#Palindromes"> </a></h2>
 </div>
 </div>
 </div>
@@ -820,9 +828,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a function <code>normstring(s: str) -&gt; str</code> which removes all non-letter characters and converts the string to lowercase.</li>
-</ul>
+<p>Write a function <code>normstring(s: str) -&gt; str</code> which removes all non-letter characters and converts the string to lowercase.</p>
 
 </div>
 </div>
@@ -860,10 +866,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a non-recursive function <code>palindrome1(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome.</li>
-<li>Hint: use <code>normstring</code> but not <code>reverse</code>.</li>
-</ul>
+<p>Write a non-recursive function <code>palindrome1(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome. Hint: use <code>normstring</code> but not <code>reverse</code>.</p>
 
 </div>
 </div>
@@ -935,10 +938,8 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a non-recursive function <code>palindrome1(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome.</li>
-<li>Hint: use <code>normstring</code> and <code>reverse</code>.</li>
-</ul>
+<p>Write a non-recursive function <code>palindrome1(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome.
+Hint: use <code>normstring</code> and <code>reverse</code>.</p>
 
 </div>
 </div>
@@ -975,10 +976,8 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a recursive function <code>palindrome(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome.</li>
-<li>Hint: use <code>normstring</code> but not <code>reverse</code>.</li>
-</ul>
+<p>Write a recursive function <code>palindrome(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome.
+Hint: use <code>normstring</code> but not <code>reverse</code>.</p>
 
 </div>
 </div>
@@ -1014,6 +1013,13 @@ Question: How do you manage the empty interval?</p>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, <code>pal</code>, the function which does the work, is internal to <code>palindrome2</code>. So, <code>normstring</code> is called only once.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1039,9 +1045,7 @@ Question: How do you manage the empty interval?</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a function <code>romans() -&gt; List[str]</code> which returns the list of all roman numbers from 1 to 4999; the element at zero being ''.</li>
-</ul>
+<p>Write a function <code>romans() -&gt; List[str]</code> which returns the list of all roman numbers from 1 to 4999; the element at zero being " ".</p>
 
 </div>
 </div>
@@ -1110,7 +1114,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The following implementation is slightly more elegant. It is the starting point of the conjoin pattern (see xxx).</p>
+<p>The following implementation is slightly more elegant. It is the starting point of the conjoin pattern (see xxx). The conjoin pattern is helpful if you don't know the number of nested loops and when the loop criteria depend on some state.</p>
 
 </div>
 </div>
@@ -1179,9 +1183,7 @@ Question: How do you manage the empty interval?</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a non-recursive function <code>bico(n: int) -&gt; List[int]</code> which returns the binomial coefficients of $(a + b)^n$</li>
-</ul>
+<p>Write a non-recursive function <code>bico(n: int) -&gt; List[int]</code> which returns the binomial coefficients of $(a + b)^n$</p>
 
 </div>
 </div>
@@ -1243,10 +1245,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a recursive function <code>bico(n: int) -&gt; List[int]</code> which returns the binomial coefficients of $(a + b)^n$</li>
-<li>How deep is the call stack?</li>
-</ul>
+<p>Write a recursive function <code>bico(n: int) -&gt; List[int]</code> which returns the binomial coefficients of $(a + b)^n$. How deep is the call stack?</p>
 
 </div>
 </div>
