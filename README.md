@@ -2,7 +2,7 @@
 > A cool approach following the Wizzard Book, with Python rather than Scheme
 
 
-what' happening here ?
+this text is not visible
 
 This is my introductory text
 
@@ -14,13 +14,23 @@ this is my introductory text
 
 this is my introductory text
 
-# A Title
-> a comment
+Some text
 
-# A Fast Track to Programming
-> A cool approach following the Wizzard Book, with Python rather than Scheme
+Some text
 
-## A Subtitle
-> A comment
-> a comment
-> a comment
+
+Some text
+
+
+Some text
+
+
+This is my introductory text
+
+this is my introductory text
+
+this is my introductory text
+
+this is my introductory text
+
+this is my introductory text
