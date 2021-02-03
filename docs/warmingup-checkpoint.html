@@ -31,7 +31,7 @@ nb_path: "nbs\.ipynb_checkpoints\01_warmingup-checkpoint.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We use fastai's test library. Our tests always preceed the implementation(s). They should silently go through.</p>
+<p>We use fastai's test library. Our tests always preceed the implementation(s). They should silently go through, returning only the execution time.</p>
 
 </div>
 </div>
@@ -43,7 +43,35 @@ nb_path: "nbs\.ipynb_checkpoints\01_warmingup-checkpoint.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastcore.test</span> <span class="kn">import</span> <span class="n">test_eq</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># !pip install nbdev</span>
+    
+<span class="kn">from</span> <span class="nn">fastcore.test</span> <span class="kn">import</span> <span class="n">test_eq</span>
+<span class="kn">from</span> <span class="nn">timeit</span> <span class="kn">import</span> <span class="n">timeit</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">lg</span> <span class="ow">in</span> <span class="p">(</span><span class="n">log2</span><span class="p">,</span> <span class="n">mlog2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">lg</span><span class="o">.</span><span class="vm">__qualname__</span> <span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">timeit</span><span class="p">(</span><span class="n">test_log2</span><span class="p">(</span><span class="n">lg</span><span class="p">),</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_and_display</span><span class="p">(</span><span class="n">testdriver</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="o">*</span><span class="n">implementations</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">implementations</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">t</span><span class="o">.</span><span class="vm">__qualname__</span> <span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">timeit</span><span class="p">(</span><span class="n">testdriver</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">number</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+    
+<span class="n">test_and_display</span><span class="p">(</span><span class="n">test_log2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">log2</span><span class="p">,</span> <span class="n">mlog2</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -55,14 +83,13 @@ nb_path: "nbs\.ipynb_checkpoints\01_warmingup-checkpoint.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Some-very-short-functions">Some very short functions<a class="anchor-link" href="#Some-very-short-functions"> </a></h2>
+<h2 id="Some-Very-Short-Functions">Some Very Short Functions<a class="anchor-link" href="#Some-Very-Short-Functions"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Write a function <code>powerOf2(n: int) -&gt; bool</code> which returns true iff  n is a power of 2
-Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. Subtracting 1 replaces the leading one with zero and the zeros by one: 8 - 1 = 7 = 0b111.</p>
+<p>We write a function <code>powerOf2(n: int) -&gt; bool</code> which returns true iff n is a power of 2.</p>
 <p>Here is what <code>powerOf2</code> is supposed to do.</p>
 
 </div>
@@ -89,6 +116,13 @@ Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. S
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Idea: A power of 2, say 8, is a 1 followed by 0s: 0b1000. Subtracting 1 changes the leading 1 to 0 and the 0s to 1: 8 - 1 = 7 = 0b111. So, a bitwise AND of n and n - 1 should do. No log, no exp.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -122,10 +156,26 @@ Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. S
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_powerOf2</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">timeit</span><span class="p">(</span><span class="n">test_powerOf2</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.03988870000000588</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -134,7 +184,7 @@ Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. S
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Write a function <code>log2(n: int) -&gt; int</code> which returns the number of binary digits of n minus one</p>
+<p>Write a function <code>log2(n: int) -&gt; int</code> which returns the number of binary digits of n minus 1.</p>
 <p>Here is what <code>log2</code> is supposed to do.</p>
 
 </div>
@@ -147,11 +197,13 @@ Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. S
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_log2</span><span class="p">():</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">log2</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_log2</span><span class="p">(</span><span class="n">lg</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">aux</span><span class="p">():</span> 
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">lg</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">lg</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">lg</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">lg</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">aux</span>
 </pre></div>
 
     </div>
@@ -161,6 +213,13 @@ Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. S
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Idea: shift <code>n</code> bitwise right while <code>n &gt; 0</code></p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -175,7 +234,6 @@ Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. S
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param n: an integer &gt;= 0</span>
 <span class="sd">    :return: (number of binary digits of n) - 1</span>
-<span class="sd">    So: log2(1) = 0, log2(2) = 1, log2(3) = 1</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span>
@@ -194,6 +252,40 @@ Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. S
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Python's math.log2 is slightly faster.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary data-open="Hide Code" data-close="Show Code"></summary>
+        <summary></summary>
+        <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="k">def</span> <span class="nf">mlog2</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param n: an integer &gt;= 0</span>
+<span class="sd">    :return: (number of binary digits of n) - 1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -201,10 +293,26 @@ Hint: No log, no exp. A power of 2, say 8, is a one followed by zeros: 0b1000. S
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_log2</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">lg</span> <span class="ow">in</span> <span class="p">(</span><span class="n">log2</span><span class="p">,</span> <span class="n">mlog2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">lg</span><span class="o">.</span><span class="vm">__qualname__</span> <span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">timeit</span><span class="p">(</span><span class="n">test_log2</span><span class="p">(</span><span class="n">lg</span><span class="p">),</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>log2  | 0.03925049999998009
+mlog2 | 0.03399940000008428
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -226,12 +334,13 @@ How do you deal with negative or zero arguments?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_gcd</span><span class="p">(</span><span class="o">*</span><span class="n">implementations</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">implementations</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_gcd</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">aux</span><span class="p">():</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">7</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="mi">7</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">aux</span>
 </pre></div>
 
     </div>
@@ -256,7 +365,6 @@ How do you deal with negative or zero arguments?</p>
 <span class="sd">    :param a: integer</span>
 <span class="sd">    :param b: integer</span>
 <span class="sd">    :return: greatest common divisor of a and b</span>
-<span class="sd">    standard solution</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">while</span> <span class="n">b</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
@@ -293,7 +401,6 @@ How do you deal with negative or zero arguments?</p>
 <span class="sd">    :param a: integer</span>
 <span class="sd">    :param b: integer</span>
 <span class="sd">    :return: greatest common divisor of a and b</span>
-<span class="sd">    recursive solution</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">a</span> <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">gcd1</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
@@ -313,10 +420,26 @@ How do you deal with negative or zero arguments?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_gcd</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span> <span class="n">gcd1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">(</span><span class="n">gcd</span><span class="p">,</span> <span class="n">gcd1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">g</span><span class="o">.</span><span class="vm">__qualname__</span> <span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">timeit</span><span class="p">(</span><span class="n">test_gcd</span><span class="p">(</span><span class="n">g</span><span class="p">),</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>gcd   | 0.04068090000009761
+gcd1  | 0.03507760000002236
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -327,7 +450,7 @@ How do you deal with negative or zero arguments?</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We consider half-open intervals such as u = [a, b) given as a tuple <code>(a, b)</code>.
 Write a function <code>intersection(u: (int, int), v: (int, int)) -&gt; (int, int)</code>
-which returns the intersection of the intervals <code>u</code> and <code>v</code>.
+which returns the intersection of the intervals <code>u</code> and <code>v</code>. Hint: This is a one-liner. No if, no else.
 Question: How do you manage the empty interval?</p>
 
 </div>
@@ -369,7 +492,6 @@ Question: How do you manage the empty interval?</p>
 <span class="sd">    :param u: half open interval (u0, u1)</span>
 <span class="sd">    :param v: half open interval (v0, v1)</span>
 <span class="sd">    :return: intersection of u and v</span>
-<span class="sd">    Convention: an interval u is empty iff u[0] &gt;= u[1]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">min</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
@@ -382,6 +504,13 @@ Question: How do you manage the empty interval?</p>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Our choice for the emtpy interval: An interval is empty if lower bound $\geq$ upper bound. This makes our program so simple.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -389,10 +518,26 @@ Question: How do you manage the empty interval?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_intersection</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">timeit</span><span class="p">(</span><span class="n">test_intersection</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.103351499999917</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -401,15 +546,13 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Faculty-and-Fibonacci,-to-recurse-or-not-to-recurse?">Faculty and Fibonacci, to recurse or not to recurse?<a class="anchor-link" href="#Faculty-and-Fibonacci,-to-recurse-or-not-to-recurse?"> </a></h2>
+<h2 id="Faculty">Faculty<a class="anchor-link" href="#Faculty"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a non-recursive function <code>faculty(n: int) -&gt; int</code> which returns n!.</li>
-</ul>
+<p>Write a non-recursive function <code>faculty(n: int) -&gt; int</code> which returns n!.</p>
 
 </div>
 </div>
@@ -421,12 +564,13 @@ Question: How do you manage the empty interval?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_faculty</span><span class="p">(</span><span class="o">*</span><span class="n">implementations</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">implementations</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_faculty</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">aux</span><span class="p">():</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="mi">40320</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">aux</span>
 </pre></div>
 
     </div>
@@ -450,7 +594,6 @@ Question: How do you manage the empty interval?</p>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param n: integer</span>
 <span class="sd">    :return:  nth-faculty</span>
-<span class="sd">    standard solution</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span>
@@ -471,10 +614,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a recursive function <code>faculty1(n: int) -&gt; int</code> which returns n!.</li>
-<li>How deep is the call stack?</li>
-</ul>
+<p>We write a recursive function <code>faculty1(n: int) -&gt; int</code> which returns n!. How deep is the call stack?</p>
 
 </div>
 </div>
@@ -493,7 +633,6 @@ Question: How do you manage the empty interval?</p>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param n: integer</span>
 <span class="sd">    :return:  nth-faculty</span>
-<span class="sd">    recursive solution</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span>
@@ -518,10 +657,26 @@ Question: How do you manage the empty interval?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_faculty</span><span class="p">(</span><span class="n">faculty</span><span class="p">,</span> <span class="n">faculty1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="n">faculty</span><span class="p">,</span> <span class="n">faculty1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="vm">__qualname__</span> <span class="si">:</span><span class="s2">&lt;9</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">timeit</span><span class="p">(</span><span class="n">test_faculty</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>faculty  | 0.03884200000038618
+faculty1 | 0.03788100000019767
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -530,9 +685,20 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a function <code>fibo(n: int) -&gt; int</code> which returns the n-th fibonacci number</li>
-</ul>
+<p>The call stack is $O(n)$. This is no problem because $n!$ can only be computed for small $n$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Fibonacci">Fibonacci<a class="anchor-link" href="#Fibonacci"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Write a function <code>fibo(n: int) -&gt; int</code> which returns the n-th fibonacci number</p>
 
 </div>
 </div>
@@ -544,12 +710,13 @@ Question: How do you manage the empty interval?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_fibo</span><span class="p">(</span><span class="o">*</span><span class="n">implementations</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">implementations</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_fibo</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">aux</span><span class="p">():</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="mi">6765</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">aux</span>
 </pre></div>
 
     </div>
@@ -573,7 +740,6 @@ Question: How do you manage the empty interval?</p>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param n: integer &gt;= 0</span>
 <span class="sd">    :return: n-th Fibonacci number</span>
-<span class="sd">    standard solution</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span>
@@ -596,10 +762,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a recursive function <code>fibo(n: int) -&gt; int</code> which returns the n-th fibonacci number.</li>
-<li>How deep is the call stack?</li>
-</ul>
+<p>Write a recursive function <code>fibo(n: int) -&gt; int</code> which returns the n-th fibonacci number. How deep is the call stack?</p>
 
 </div>
 </div>
@@ -643,10 +806,26 @@ Question: How do you manage the empty interval?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_fibo</span><span class="p">(</span><span class="n">fibo</span><span class="p">,</span> <span class="n">fibo1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="n">fibo</span><span class="p">,</span> <span class="n">fibo1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="vm">__qualname__</span> <span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">timeit</span><span class="p">(</span><span class="n">test_fibo</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">number</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>fibo  | 0.0035622999994302518
+fibo1 | 0.2929365999998481
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -655,15 +834,13 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Reversing-and-palindromes">Reversing and palindromes<a class="anchor-link" href="#Reversing-and-palindromes"> </a></h2>
+<h2 id="Reversing-Lists">Reversing Lists<a class="anchor-link" href="#Reversing-Lists"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a non-recursive function <code>reverse(xs: list) -&gt; None</code> which reverses the list <code>xs</code> in place.</li>
-</ul>
+<p>Write a non-recursive function <code>reverse(xs: list) -&gt; None</code> which reverses the list <code>xs</code> in place.</p>
 
 </div>
 </div>
@@ -675,22 +852,32 @@ Question: How do you manage the empty interval?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_reverse_in_place</span><span class="p">():</span>
-    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-    <span class="n">xs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randrange</span>
 
-    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">xs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_reverse_in_place</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">aux</span><span class="p">():</span>
+        <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="n">r</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
 
-    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="n">xs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+        <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">r</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
 
-    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="n">xs</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-    <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+        <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">r</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+
+        <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">r</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+
+        <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">randrange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+        <span class="n">ys</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">r</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+        <span class="n">r</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">aux</span>
 </pre></div>
 
     </div>
@@ -700,6 +887,15 @@ Question: How do you manage the empty interval?</p>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A few comments on the last testcase: <code>xs</code> is a list of a thousand random integers between 0 and 99.
+This testcase documents the fact that reversing a list twice restores the original list: reverse equals its inverse. 
+Note that <code>ys</code> is a copy of <code>xs</code>, rather than an alias.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -715,7 +911,6 @@ Question: How do you manage the empty interval?</p>
 <span class="sd">    :param xs: a list</span>
 <span class="sd">    :return: None</span>
 <span class="sd">    Side effect: This function reverses the order of xs</span>
-<span class="sd">    standard solution</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
@@ -737,10 +932,26 @@ Question: How do you manage the empty interval?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_reverse_in_place</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">(</span><span class="n">reverse</span><span class="p">,</span> <span class="nb">list</span><span class="o">.</span><span class="n">reverse</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="vm">__qualname__</span> <span class="si">:</span><span class="s2">&lt;13</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">timeit</span><span class="p">(</span><span class="n">test_reverse_in_place</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">number</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>reverse      | 0.09573900000032154
+list.reverse | 0.0831092999997054
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -749,10 +960,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a recursive function <code>reverse1(xs: list) -&gt; list</code> which returns the list <code>xs</code>in reversed order.</li>
-<li>How deep is the call stack?</li>
-</ul>
+<p>Write a recursive function <code>reverse1(xs: list) -&gt; list</code> which returns the list <code>xs</code>in reversed order. How deep is the call stack?</p>
 
 </div>
 </div>
@@ -769,6 +977,10 @@ Question: How do you manage the empty interval?</p>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">reverse1</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">reverse1</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">reverse1</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">randrange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">reverse1</span><span class="p">(</span><span class="n">reverse1</span><span class="p">(</span><span class="n">xs</span><span class="p">)),</span> <span class="n">ys</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -795,7 +1007,7 @@ Question: How do you manage the empty interval?</p>
 <span class="sd">    same as reverse0, recursive solution</span>
 <span class="sd">    This produces O(n) new lists!</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">reverse1</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="p">[</span><span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">xs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">reverse1</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="p">[</span><span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 </pre></div>
 
     </div>
@@ -813,7 +1025,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_reverse</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">timeit</span><span class="p">(</span><span class="n">test_reverse</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -825,15 +1037,12 @@ Question: How do you manage the empty interval?</p>
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-32-7681283dfdda&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>test_reverse<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
 
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;test_reverse&#39; is not defined</pre>
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.144225699999879</pre>
 </div>
+
 </div>
 
 </div>
@@ -844,9 +1053,13 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a function <code>normstring(s: str) -&gt; str</code> which removes all non-letter characters and converts the string to lowercase.</li>
-</ul>
+<h2 id="Palindromes">Palindromes<a class="anchor-link" href="#Palindromes"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Write a function <code>normstring(s: str) -&gt; str</code> which removes all non-letter characters and converts the string to lowercase.</p>
 
 </div>
 </div>
@@ -884,10 +1097,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a non-recursive function <code>palindrome1(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome.</li>
-<li>Hint: use <code>normstring</code> but not <code>reverse</code>.</li>
-</ul>
+<p>Write a non-recursive function <code>palindrome1(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome. Hint: use <code>normstring</code> but not <code>reverse</code>.</p>
 
 </div>
 </div>
@@ -899,8 +1109,8 @@ Question: How do you manage the empty interval?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_palindrome</span><span class="p">(</span><span class="o">*</span><span class="n">implementations</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">implementations</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_palindrome</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">aux</span><span class="p">():</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;xx&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
@@ -916,6 +1126,7 @@ Question: How do you manage the empty interval?</p>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Eine treue Familie bei Lima feuerte nie&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Mad Zeus, no live devil, lived evil on Suez dam&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;Straw? No, too stupid a fad. I put soot on warts.&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">aux</span>
 </pre></div>
 
     </div>
@@ -939,7 +1150,6 @@ Question: How do you manage the empty interval?</p>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param xs: string</span>
 <span class="sd">    :return: true if xs is a palindrome</span>
-<span class="sd">    standard solution</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ys</span> <span class="o">=</span> <span class="n">normstring</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
     <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
@@ -959,10 +1169,8 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a non-recursive function <code>palindrome1(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome.</li>
-<li>Hint: use <code>normstring</code> and <code>reverse</code>.</li>
-</ul>
+<p>Write a non-recursive function <code>palindrome1(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome.
+Hint: use <code>normstring</code> and <code>reverse</code>.</p>
 
 </div>
 </div>
@@ -999,10 +1207,8 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a recursive function <code>palindrome(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome.</li>
-<li>Hint: use <code>normstring</code> but not <code>reverse</code>.</li>
-</ul>
+<p>Write a recursive function <code>palindrome(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome.
+Hint: use <code>normstring</code> but not <code>reverse</code>.</p>
 
 </div>
 </div>
@@ -1038,6 +1244,13 @@ Question: How do you manage the empty interval?</p>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, <code>pal</code>, the function which does the work, is internal to <code>palindrome2</code>. So, <code>normstring</code> is called only once.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1045,10 +1258,27 @@ Question: How do you manage the empty interval?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_palindrome</span><span class="p">(</span><span class="n">palindrome</span><span class="p">,</span> <span class="n">palindrome1</span><span class="p">,</span> <span class="n">palindrome2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">(</span><span class="n">palindrome</span><span class="p">,</span> <span class="n">palindrome1</span><span class="p">,</span> <span class="n">palindrome2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="vm">__qualname__</span> <span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">timeit</span><span class="p">(</span><span class="n">test_palindrome</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">number</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>palindrome  | 0.022269000000051165
+palindrome1 | 0.021730200000092736
+palindrome2 | 0.025321099999928265
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -1063,9 +1293,7 @@ Question: How do you manage the empty interval?</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a function <code>romans() -&gt; List[str]</code> which returns the list of all roman numbers from 1 to 4999; the element at zero being ''.</li>
-</ul>
+<p>Write a function <code>romans() -&gt; List[str]</code> which returns the list of all roman numbers from 1 to 4999, the element at zero being " ".</p>
 
 </div>
 </div>
@@ -1077,14 +1305,15 @@ Question: How do you manage the empty interval?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_romans</span><span class="p">(</span><span class="o">*</span><span class="n">implementations</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">implementations</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_romans</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">aux</span><span class="p">():</span>
         <span class="n">rs</span> <span class="o">=</span> <span class="n">r</span><span class="p">()</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rs</span><span class="p">),</span> <span class="mi">5000</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;I&#39;</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="s1">&#39;IX&#39;</span><span class="p">)</span>
         <span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">4999</span><span class="p">],</span> <span class="s1">&#39;MMMMCMXCIX&#39;</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">aux</span>
 </pre></div>
 
     </div>
@@ -1134,7 +1363,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The following implementation is slightly more elegant. It is the starting point of the conjoin pattern (see xxx).</p>
+<p>The following implementation is slightly more elegant. It is the starting point of the conjoin pattern (see xxx). This pattern is helpful if you don't know the number of nested loops and when the loop criteria depend on the state stored in a single variable, here <code>number</code>.</p>
 
 </div>
 </div>
@@ -1185,10 +1414,26 @@ Question: How do you manage the empty interval?</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_romans</span><span class="p">(</span><span class="n">romans</span><span class="p">,</span> <span class="n">romans1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">(</span><span class="n">romans</span><span class="p">,</span> <span class="n">romans1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="vm">__qualname__</span> <span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">timeit</span><span class="p">(</span><span class="n">test_romans</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">number</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>romans  | 0.10284279999996215
+romans1 | 0.08801719999974011
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -1203,9 +1448,7 @@ Question: How do you manage the empty interval?</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a non-recursive function <code>bico(n: int) -&gt; List[int]</code> which returns the binomial coefficients of $(a + b)^n$</li>
-</ul>
+<p>Write a non-recursive function <code>bico(n: int) -&gt; List[int]</code> which returns the binomial coefficients of $(a + b)^n$</p>
 
 </div>
 </div>
@@ -1267,10 +1510,7 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Write a recursive function <code>bico(n: int) -&gt; List[int]</code> which returns the binomial coefficients of $(a + b)^n$</li>
-<li>How deep is the call stack?</li>
-</ul>
+<p>Write a recursive function <code>bico(n: int) -&gt; List[int]</code> which returns the binomial coefficients of $(a + b)^n$. How deep is the call stack?</p>
 
 </div>
 </div>
@@ -1331,13 +1571,26 @@ Question: How do you manage the empty interval?</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Lessons-Learned">Lessons Learned<a class="anchor-link" href="#Lessons-Learned"> </a></h2>
+<h2 id="Things-to-Remember">Things to Remember<a class="anchor-link" href="#Things-to-Remember"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>todo</p>
+<h3 id="Testing-Counts">Testing Counts<a class="anchor-link" href="#Testing-Counts"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Testing has at least three benefits:</p>
+<ul>
+<li>Understanding: The programmer gets a clear image of what the program is supposed to do. </li>
+<li>Definition of Done: You are done when the all testcases succeed.</li>
+<li>Documentation: Testcases document univocally what the function does.</li>
+</ul>
+<p>We always start with trivial testcases: None, zero, one, two, the empty list, a list with one element.
+Testcases evolve in time.</p>
 
 </div>
 </div>
