@@ -31,6 +31,33 @@ nb_path: "nbs\02_collections.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>We use fastai's test library. Our tests always preceed the implementation(s). They should silently go through, returning only the execution time.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># !pip install nbdev</span>
+
+<span class="kn">from</span> <span class="nn">fastcore.test</span> <span class="kn">import</span> <span class="n">test_eq</span>
+<span class="kn">from</span> <span class="nn">timeit</span> <span class="kn">import</span> <span class="n">timeit</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Tuples-and-Lists">Tuples and Lists<a class="anchor-link" href="#Tuples-and-Lists"> </a></h2><p>Iterables produce Iterators via <code>iter()</code> such as all Collections.
 Iterator yield the next element via <code>next()</code>. By convention, all Iterators
 are also Iterables; the standard implementation being to return self.
@@ -73,13 +100,14 @@ Some examples:</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="L">L<a class="anchor-link" href="#L"> </a></h2>
+<h2 id="Merging-Lists">Merging Lists<a class="anchor-link" href="#Merging-Lists"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>todo</p>
+<p>We write a function <code>merge(xs, ys: list) -&gt; list</code> which returns the merge of non-descending lists xs and ys.
+Here is what <code>merge</code> is supposed to do.</p>
 
 </div>
 </div>
@@ -91,12 +119,18 @@ Some examples:</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">cycle</span><span class="p">,</span> <span class="n">islice</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span>
-<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
-<span class="kn">from</span> <span class="nn">numbers</span> <span class="kn">import</span> <span class="n">Number</span>
-<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_merge</span><span class="p">(</span><span class="n">mrg</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">aux</span><span class="p">():</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+        <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+        <span class="n">test_eq</span><span class="p">(</span><span class="n">mrg</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">),</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+            <span class="n">xs</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">ys</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">mrg</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+            <span class="n">test_eq</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">i</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">m</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">aux</span>
 </pre></div>
 
     </div>
@@ -108,8 +142,7 @@ Some examples:</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Write a function <code>naturals() -&gt; Iterator</code> which yields the natural numbers starting at 0.
-Hint: Use <code>yield</code></p>
+<p>Idea:</p>
 
 </div>
 </div>
@@ -124,14 +157,41 @@ Hint: Use <code>yield</code></p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">naturals</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    :param start: an integer</span>
-<span class="sd">    :return: the naturals</span>
+<span class="sd">    :param xs: a non-descending list</span>
+<span class="sd">    :param ys: a non-descending list</span>
+<span class="sd">    :return: merge of xs and ys</span>
+<span class="sd">    Standard solution. A bit tricky.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="k">yield</span> <span class="n">start</span>
-        <span class="n">start</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># invariants:</span>
+    <span class="c1"># x, y first elements of xs, ys, None if there is no first element</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">xs</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">ys</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">ys</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="k">while</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">y</span><span class="p">:</span>  <span class="c1"># same as x is not None and y is not None</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">y</span><span class="p">:</span>  <span class="c1"># get next element of xs for next loop</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">xs</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># get next element of ys for next loop</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">ys</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">ys</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="c1"># x or y may be left behind (but not both)</span>
+    <span class="k">if</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">y</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="c1"># one of the remaining xs, ys is empty</span>
+    <span class="c1"># the one which is not (if any) is appended to result</span>
+    <span class="k">if</span> <span class="n">xs</span><span class="p">:</span>  <span class="c1"># same as len(xs) &gt; 0</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">xs</span>
+    <span class="k">if</span> <span class="n">ys</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">ys</span>
+
+    <span class="k">return</span> <span class="n">result</span>
 </pre></div>
 
     </div>
@@ -144,7 +204,89 @@ Hint: Use <code>yield</code></p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Exercise-B">Exercise B<a class="anchor-link" href="#Exercise-B"> </a></h2>
+<h4 id="A-recursive-solution.">A recursive solution.<a class="anchor-link" href="#A-recursive-solution."> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary data-open="Hide Code" data-close="Show Code"></summary>
+        <summary></summary>
+        <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">merge1</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param xs: a non-descending list</span>
+<span class="sd">    :param ys: a non-descending list</span>
+<span class="sd">    :return: merge of xs and ys</span>
+<span class="sd">    This the definition of merge, and it does run!</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">xs</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">ys</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ys</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">xs</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge1</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">ys</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ys</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge1</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">mrg</span> <span class="ow">in</span> <span class="p">(</span><span class="n">merge</span><span class="p">,</span> <span class="n">merge1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mrg</span><span class="o">.</span><span class="vm">__name__</span> <span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">timeit</span><span class="p">(</span><span class="n">test_merge</span><span class="p">(</span><span class="n">mrg</span><span class="p">),</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>merge | 13.045419299999594
+merge1| 15.533606099999815
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Towers-of-Hanoi">Towers of Hanoi<a class="anchor-link" href="#Towers-of-Hanoi"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We write a function <code>hanoi(n: int) -&gt; list</code> which returns the list of all moves when you do the towers of Hanoi with
+n disks on the first pole. The number of moves is exactly 2**n. Here is what <code>hanoi</code> is supposed to do.</p>
+
 </div>
 </div>
 </div>
@@ -155,10 +297,112 @@ Hint: Use <code>yield</code></p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_hanoi</span><span class="p">():</span>
+    <span class="n">protocol</span> <span class="o">=</span> <span class="n">hanoi</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">[([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[]),</span>    <span class="c1"># initial state</span>
+                <span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[]),</span>      <span class="c1"># move disk 1 from a to b</span>
+                <span class="p">([],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">]),</span>      <span class="c1"># move disk 2 from a to c</span>
+                <span class="p">([],</span> <span class="p">[],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])]</span>    <span class="c1"># move disk 1 from b to c</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">protocol</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hanoi</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Idea:</p>
+<p>(1) A natural representation of the Hanoi towers ar three stacks, named a, b, c.
+The first one, a, is initialized to [n, n-1, ..., 1], b and c are empty.</p>
+<p>(2) Let <code>move(k, x, y, z)</code> denote the move of k disks from stack x to stack z using y as buffer.</p>
+<p>The algorithm is recursive:
+<code>move(1, a, b, c)</code> is obvious: Just perform the move, let the buffer alone.
+<code>move(2, a, b, c)</code> requires three moves: <code>(1, a, c, b), (1, a, b, c), (1, b, a, c)</code>
+In exactly the same way the general case <code>move(n, a, b, c)</code> can be reduced to three
+moves with n-1 instead of n.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary data-open="Hide Code" data-close="Show Code"></summary>
+        <summary></summary>
+        <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">hanoi</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Towers of Hanoi. Exponential time (n = 22 -&gt; 12s)</span>
+<span class="sd">    :param n: number of disks on first tower &gt; 0</span>
+<span class="sd">    :return: protocol of all moves</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)),</span> <span class="p">[],</span> <span class="p">[]</span>     <span class="c1"># a = [n, n-1, ..., 1]</span>
+    <span class="n">protocol</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">c</span><span class="p">))]</span>
+
+    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function moves k disks from x to z using y</span>
+<span class="sd">        :param k: number of disks to move</span>
+<span class="sd">        :param x: stack to move from</span>
+<span class="sd">        :param y: buffer</span>
+<span class="sd">        :param z: stack to move to</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+            <span class="n">protocol</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">c</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">move</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">move</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+            <span class="n">move</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+
+    <span class="n">move</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">protocol</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hanoi</span><span class="o">.</span><span class="vm">__name__</span> <span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2">| </span><span class="si">{</span><span class="n">timeit</span><span class="p">(</span><span class="n">test_hanoi</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>hanoi | 3.1124548999996478
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
