@@ -7,4 +7,3 @@
 > A collection of simple and challenging exercises
 
 some more text
-some more text

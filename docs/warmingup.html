@@ -39,11 +39,36 @@ nb_path: "nbs\01_warmingup.ipynb"
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># !pip install nbdev</span>
     
 <span class="kn">from</span> <span class="nn">timeit</span> <span class="kn">import</span> <span class="n">timeit</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">NewType</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="kn">from</span> <span class="nn">fastcore.test</span> <span class="kn">import</span> <span class="n">test_eq</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">NewType</span><span class="p">,</span> <span class="n">Tuple</span>
+</pre></div>
 
+    </div>
+</div>
+</div>
 
-<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="o">*</span><span class="n">fs</span><span class="p">):</span><span class="c1"># a utility for running tests</span>
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The utility function <code>run</code> runs the testees given by <code>fs</code> against <code>test</code>, and that <code>n</code> times.
+It is called once for each exercise and tests all alternative implementations.
+It should silently go through, returning only the execution times for each testee.
+The number <code>n</code> is generally chosen such that waiting times are around one second or below.</p>
+<p>We use fastai's test library.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="o">*</span><span class="n">fs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param test: a testdriver</span>
 <span class="sd">    :n: number of repetitions</span>
@@ -69,8 +94,8 @@ nb_path: "nbs\01_warmingup.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Problem: Write a function <code>power_of2(n: int) -&gt; bool</code> which returns true iff n is a power of 2.
-The following test defines what <code>power_of2</code>is supposed to do. It is written as a testcase which accepts an implementation and runs against some testcases. We use fastai's test library. Our tests always preceed the implementation(s). They should silently go through, returning only the execution time.</p>
+<p>Problem 01: Write a function <code>power_of2(n: int) -&gt; bool</code> which returns true iff n is a power of 2.
+The following test defines what <code>power_of2</code>is supposed to do.</p>
 
 </div>
 </div>
@@ -82,7 +107,7 @@ The following test defines what <code>power_of2</code>is supposed to do. It is w
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_pow</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_01</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]):</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span>
@@ -139,24 +164,10 @@ So, a bitwise AND of n and n - 1 should do. No log, no exp.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_pow</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>  <span class="n">power_of2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_01</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>  <span class="n">power_of2</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>power_of2    | 0.0728
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -165,7 +176,7 @@ So, a bitwise AND of n and n - 1 should do. No log, no exp.</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Problem: Write a function <code>log2(n: int) -&gt; int</code> which returns the number of binary digits of n minus 1.</p>
+<p>Problem 02: Write a function <code>log2(n: int) -&gt; int</code> which returns the number of binary digits of n minus 1.</p>
 
 </div>
 </div>
@@ -177,7 +188,7 @@ So, a bitwise AND of n and n - 1 should do. No log, no exp.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_log2</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_02</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
@@ -272,25 +283,10 @@ So, a bitwise AND of n and n - 1 should do. No log, no exp.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_log2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>  <span class="n">log2</span><span class="p">,</span> <span class="n">mlog2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_02</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>  <span class="n">log2</span><span class="p">,</span> <span class="n">mlog2</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>log2         | 0.0493
-mlog2        | 0.0415
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -305,7 +301,7 @@ mlog2        | 0.0415
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Problem: Write a function <code>gcd(a: int, b: int) -&gt; int</code> which returns the greatest common divisor of a and b.</p>
+<p>Problem 03: Write a function <code>gcd(a: int, b: int) -&gt; int</code> which returns the greatest common divisor of a and b.</p>
 
 </div>
 </div>
@@ -317,7 +313,7 @@ mlog2        | 0.0415
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_03</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">7</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="mi">7</span><span class="p">)</span>
@@ -413,25 +409,10 @@ mlog2        | 0.0415
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_gcd</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">gcd</span><span class="p">,</span> <span class="n">gcd1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_03</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">gcd</span><span class="p">,</span> <span class="n">gcd1</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>gcd          | 0.0608
-gcd1         | 0.0700
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -447,7 +428,7 @@ gcd1         | 0.0700
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We consider half-open intervals such as u = [a, b) given as a tuple <code>(a, b)</code>.</p>
-<p>Problem: Write a function <code>intersection(u: (int, int), v: (int, int)) -&gt; (int, int)</code>
+<p>Problem 04: Write a function <code>intersection(u: (int, int), v: (int, int)) -&gt; (int, int)</code>
 which returns the intersection <code>u</code> and <code>v</code>. Hint: This is a one-liner, no ifs, no elses.
 Main question: How do you manage the empty interval?
 Our choice: An interval is empty iff lower bound $\geq$ upper bound, so (0, -1), (0, 0), (3, 2) all represent the same and unique empty interval. This makes our program so simple.</p>
@@ -464,7 +445,7 @@ Our choice: An interval is empty iff lower bound $\geq$ upper bound, so (0, -1),
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Interval</span> <span class="o">=</span> <span class="n">NewType</span><span class="p">(</span><span class="s1">&#39;Interval&#39;</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span>
 
-<span class="k">def</span> <span class="nf">test_intersection</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Interval</span><span class="p">,</span> <span class="n">Interval</span><span class="p">],</span> <span class="n">Interval</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">test_04</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Interval</span><span class="p">,</span> <span class="n">Interval</span><span class="p">],</span> <span class="n">Interval</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>    <span class="c1"># empty interval</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>    <span class="c1"># empty interval</span>
@@ -512,24 +493,10 @@ Our choice: An interval is empty iff lower bound $\geq$ upper bound, so (0, -1),
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_intersection</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>  <span class="n">intersection</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_04</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span>  <span class="n">intersection</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>intersection | 0.1115
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -544,7 +511,7 @@ Our choice: An interval is empty iff lower bound $\geq$ upper bound, so (0, -1),
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Problem: Write a function <code>faculty(n: int) -&gt; int</code> which returns n!.</p>
+<p>Problem 05: Write a function <code>faculty(n: int) -&gt; int</code> which returns n!.</p>
 
 </div>
 </div>
@@ -556,7 +523,7 @@ Our choice: An interval is empty iff lower bound $\geq$ upper bound, so (0, -1),
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_faculty</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_05</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
@@ -611,7 +578,7 @@ Our choice: An interval is empty iff lower bound $\geq$ upper bound, so (0, -1),
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The recursive function is more elegant and slightly faster. The call stack is $O(n)$, but as $n!$ can only be computed for small $n$, this is no problem.</p>
+<p>The recursive solution is more elegant and slightly faster. The call stack is $O(n)$, but as $n!$ can only be computed for small $n$, this is no problem.</p>
 
 </div>
 </div>
@@ -654,25 +621,10 @@ Our choice: An interval is empty iff lower bound $\geq$ upper bound, so (0, -1),
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_faculty</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">faculty</span><span class="p">,</span> <span class="n">faculty1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_05</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">faculty</span><span class="p">,</span> <span class="n">faculty1</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>faculty      | 0.0361
-faculty1     | 0.0366
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -687,7 +639,7 @@ faculty1     | 0.0366
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Problem: Write a function <code>fibo(n: int) -&gt; int</code> which returns the n-th fibonacci number</p>
+<p>Problem: We write a function <code>fibo(n: int) -&gt; int</code> which returns the n-th fibonacci number</p>
 
 </div>
 </div>
@@ -699,7 +651,7 @@ faculty1     | 0.0366
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_fibo</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_05</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
@@ -749,7 +701,8 @@ faculty1     | 0.0366
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The recursive solution is exactly the definition of the fibonacci series. This is clear and elegant but extremly slow.</p>
+<p>The recursive solution represents exactly the definition of the fibonacci series.
+This is clear and concise but inthat case extremely slow.</p>
 
 </div>
 </div>
@@ -793,25 +746,10 @@ faculty1     | 0.0366
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_fibo</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">fibo</span><span class="p">,</span> <span class="n">fibo1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_05</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">fibo</span><span class="p">,</span> <span class="n">fibo1</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>fibo         | 0.0360
-fibo1        | 3.0735
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -826,7 +764,10 @@ fibo1        | 3.0735
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Problem: Write a function <code>reverse_(xs: list) -&gt; None</code> which reverses the list <code>xs</code> in place. We compare our solution to the builtin function <code>list.reverse</code>.</p>
+<p>Problem 06: Write a function <code>reverse_(xs: list) -&gt; None</code> which reverses the list <code>xs</code> in place.
+We compare our solution to the builtin function <code>list.reverse</code>.
+Please not the difference between reversing in place (the list itself is reversed) and reversing not in place
+(a new list is produced).</p>
 
 </div>
 </div>
@@ -840,7 +781,7 @@ fibo1        | 3.0735
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randrange</span>
 
-<span class="k">def</span> <span class="nf">test_reverse_in_place</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">test_06</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
     <span class="n">r</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
@@ -873,7 +814,7 @@ fibo1        | 3.0735
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A few comments on the last testcase: <code>xs</code> is a list of a thousand random integers between 0 and 99.
+<p>A comment on the last testcase: <code>xs</code> is a list of a thousand random integers between 0 and 99.
 This testcase documents the fact that reversing a list twice restores the original list: reverse equals its inverse. 
 Note that <code>ys</code> is a copy of <code>xs</code>, rather than an alias.</p>
 <p>Idea: Swap the first and the last element, then the second and the last but one and so on. Stop in the middle.</p>
@@ -917,25 +858,10 @@ Note that <code>ys</code> is a copy of <code>xs</code>, rather than an alias.</p
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_reverse_in_place</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">reverse_</span><span class="p">,</span> <span class="nb">list</span><span class="o">.</span><span class="n">reverse</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_06</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">reverse_</span><span class="p">,</span> <span class="nb">list</span><span class="o">.</span><span class="n">reverse</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>reverse_     | 0.1217
-list.reverse | 0.0900
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -944,7 +870,7 @@ list.reverse | 0.0900
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Problem: Write a function <code>reverse(xs: List) -&gt; List</code> which returns the list <code>xs</code>in reversed order.</p>
+<p>Problem 07: Write a function <code>reverse(xs: List) -&gt; List</code> which returns the list <code>xs</code>in reversed order.</p>
 
 </div>
 </div>
@@ -956,7 +882,7 @@ list.reverse | 0.0900
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_reverse</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_07</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">r</span><span class="p">([]),</span> <span class="p">[])</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">r</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">r</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
@@ -976,7 +902,8 @@ list.reverse | 0.0900
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Idea as above: Swap the first and the last element, the call <code>reverse</code> recursively on the non swapped subset from the second to the last but first element.</p>
+<p>Idea as above: Swap the first and the last element,
+then call <code>reverse</code> recursively on the not yet swapped subset from the second to the last but first element.</p>
 
 </div>
 </div>
@@ -1016,24 +943,10 @@ list.reverse | 0.0900
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_reverse</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">reverse</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_07</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">reverse</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>reverse      | 0.1405
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -1048,7 +961,10 @@ list.reverse | 0.0900
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A palindrom is a string which can be read in both directions such as "xx" or "Mad Zeus, no live devil, lived evil on Suez dam". Punctuation marks are ignored, lower and upper case letters are considered equal. So, we need a function <code>normstring(s: str) -&gt; str</code> which removes all non-letter characters and converts the string to lowercase.</p>
+<p>A palindrom is a string which can be read in both directions such as "xx" or
+ "Mad Zeus, no live devil, lived evil on Suez dam".
+ Punctuation marks are ignored, lower and upper case letters are considered equal.
+ So, we need a function <code>normstring(s: str) -&gt; str</code> which removes all non-letter characters and converts the string to lowercase.</p>
 
 </div>
 </div>
@@ -1063,18 +979,14 @@ list.reverse | 0.0900
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">normstring</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
+
+<span class="c1">#collapse</span>
+<span class="k">def</span> <span class="nf">normstring</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param s: a string</span>
 <span class="sd">    :return: keeps ascii letters only and converts s to lower case</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">string</span>
-    <span class="c1"># result = &#39;&#39;</span>
-    <span class="c1"># for c in s:</span>
-    <span class="c1">#    if c in string.ascii_letters:</span>
-    <span class="c1">#        result += str.lower(c)</span>
-    <span class="c1"># return result</span>
-
     <span class="k">return</span> <span class="p">[</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span><span class="p">]</span>
 </pre></div>
 
@@ -1088,7 +1000,7 @@ list.reverse | 0.0900
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Problem: Write a function <code>palindrome1(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome. Hint: use <code>normstring</code> but not <code>reverse</code>.</p>
+<p>Problem 08: Write a function <code>palindrome1(s: str) -&gt; bool</code> which returns true iff the string s is a palindrome.</p>
 
 </div>
 </div>
@@ -1100,7 +1012,7 @@ list.reverse | 0.0900
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_palindrome</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_08</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="s2">&quot;xx&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
@@ -1127,7 +1039,9 @@ list.reverse | 0.0900
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The non-recursive solution ressembles the reverse function: Normalize the input first. Then compare the first and the last letter. If they coincide, proceed to the next pair, if not return False.</p>
+<p>The non-recursive solution resembles the reverse function:
+Normalize the input first. Then compare the first and the last letter.
+If they coincide proceed to the next pair, if not return False.</p>
 
 </div>
 </div>
@@ -1165,7 +1079,7 @@ list.reverse | 0.0900
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The recursive solution neeeds a local helper function if <code>normstring</code> is to be called only once.</p>
+<p>The recursive solution needs a local helper function if <code>normstring</code> is to be called only once.</p>
 
 </div>
 </div>
@@ -1242,26 +1156,10 @@ list.reverse | 0.0900
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_palindrome</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">palindrome</span><span class="p">,</span> <span class="n">palindrome1</span><span class="p">,</span> <span class="n">palindrome2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_08</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">palindrome</span><span class="p">,</span> <span class="n">palindrome1</span><span class="p">,</span> <span class="n">palindrome2</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>palindrome   | 0.2126
-palindrome1  | 0.2399
-palindrome2  | 0.1930
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -1276,8 +1174,8 @@ palindrome2  | 0.1930
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Problem: Write a function <code>romans() -&gt; List[str]</code> which returns the list of all roman numbers from 1 to 4999, the element at zero being " ".</p>
-<p>Note: Converting to and from Roman numbers is easiest and fastest done by means of two dictionaries.</p>
+<p>Problem 09: Write a function <code>romans() -&gt; List[str]</code>
+which returns the list of all roman numbers from 1 to 4999, the element at zero being " ".</p>
 
 </div>
 </div>
@@ -1289,7 +1187,7 @@ palindrome2  | 0.1930
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_romans</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_09</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">rs</span> <span class="o">=</span> <span class="n">r</span><span class="p">()</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rs</span><span class="p">),</span> <span class="mi">5000</span><span class="p">)</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">rs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
@@ -1307,7 +1205,10 @@ palindrome2  | 0.1930
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Idea: We keep four lists of Roman digits: the ones from 'I' to 'IX', the tens from 'X' to 'XC', and the hundreds from 'C' to 'CM' and the thousands from 'M' to 'MMMM'. Roman numpber stop at 'MMMMCMXCIX' which is 4999. For technical reasons each list is prepended with the empty character. The algorithm is a simple fourfold loop.</p>
+<p>Idea: We keep four lists of Roman digits: the ones from 'I' to 'IX', the tens from 'X' to 'XC',
+and the hundreds from 'C' to 'CM' and the thousands from 'M' to 'MMMM'.
+The largest Roman number is 'MMMMCMXCIX' (4999).
+For technical reasons each list is prepended with the empty character. The algorithm is a simple fourfold loop.</p>
 
 </div>
 </div>
@@ -1322,9 +1223,7 @@ palindrome2  | 0.1930
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-
-<span class="k">def</span> <span class="nf">romans</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">romans</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :return: romans numbers from 1 to 4999</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1369,9 +1268,7 @@ stored in a single variable, here <code>number</code>.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
-
-<span class="k">def</span> <span class="nf">romans1</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">romans1</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :return: romans numbers from 1 to 4999</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1405,25 +1302,104 @@ stored in a single variable, here <code>number</code>.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_romans</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">romans</span><span class="p">,</span> <span class="n">romans1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_09</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">romans</span><span class="p">,</span> <span class="n">romans1</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
+</div>
+    {% endraw %}
 
-<div class="output_area">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Converting to and from Roman numbers is easiest and fastest done by means of two dictionaries.
+Problem 10: We write a function which returns two other functions <code>to_roman</code> and <code>from_roman</code>.
+It generates the list of Roman numbers and a dictionary which maps Roman numbers back to integers.</p>
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>romans       | 0.0952
-romans1      | 0.0901
-</pre>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_10</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">to_roman</span><span class="p">,</span> <span class="n">from_roman</span> <span class="o">=</span> <span class="n">r</span><span class="p">()</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">to_roman</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">to_roman</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;I&#39;</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">to_roman</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span> <span class="s1">&#39;IX&#39;</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">to_roman</span><span class="p">(</span><span class="mi">4999</span><span class="p">),</span> <span class="s1">&#39;MMMMCMXCIX&#39;</span> <span class="p">)</span>
+
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">from_roman</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">from_roman</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">from_roman</span><span class="p">(</span><span class="s1">&#39;IX&#39;</span><span class="p">),</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">from_roman</span><span class="p">(</span><span class="s1">&#39;MMMMCMXCIX&#39;</span><span class="p">),</span> <span class="mi">4999</span><span class="p">)</span>
+
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">randrange</span><span class="p">(</span><span class="mi">4999</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+    <span class="n">rs</span> <span class="o">=</span> <span class="p">[</span><span class="n">to_roman</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
+    <span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">from_roman</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rs</span><span class="p">]</span>
+    <span class="n">test_eq</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary data-open="Hide Code" data-close="Show Code"></summary>
+        <summary></summary>
+        <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">roman_trafos</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :return: functions to_roman, from_roman</span>
+<span class="sd">    to_roman_list and from_roman_map are computed once.</span>
+<span class="sd">    They are contained in the closure of to_roman and from_roman</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">to_roman_list</span> <span class="o">=</span> <span class="n">romans</span><span class="p">()</span>
+    <span class="n">from_roman_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">to_roman_list</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5000</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">to_roman</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">to_roman_list</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">from_roman</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">from_roman_map</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">to_roman</span><span class="p">,</span> <span class="n">from_roman</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">roman_trafos</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
@@ -1438,7 +1414,7 @@ romans1      | 0.0901
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Problem: Write a function <code>bico(n: int) -&gt; List[int]</code> which returns the binomial coefficients of $(a + b)^n$</p>
+<p>Problem 11: Write a function <code>bico(n: int) -&gt; List[int]</code> which returns the binomial coefficients of $(a + b)^n$</p>
 
 </div>
 </div>
@@ -1450,7 +1426,7 @@ romans1      | 0.0901
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_bico</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test_11</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">b</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">b</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
     <span class="n">test_eq</span><span class="p">(</span><span class="n">b</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
@@ -1466,7 +1442,9 @@ romans1      | 0.0901
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Idea: We apply the defining rule of Pascals triangle: each start with 1 as first and last element of each line, so there is 1 on top. Every coefficient is the sum of the two numbers above.</p>
+<p>Idea: We apply the defining rule of Pascals triangle:
+The first and last element of each row is 1; the topmost row is just 1.
+Every coefficient is the sum of the two coefficients above.</p>
 
 </div>
 </div>
@@ -1554,57 +1532,16 @@ romans1      | 0.0901
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_bico</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">bico</span><span class="p">,</span> <span class="n">bico1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">test_11</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">bico</span><span class="p">,</span> <span class="n">bico1</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>bico         | 0.0139
-bico1        | 0.0137
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Things-to-Remember">Things to Remember<a class="anchor-link" href="#Things-to-Remember"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Testing-Counts">Testing Counts<a class="anchor-link" href="#Testing-Counts"> </a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Testing has at least three benefits:</p>
-<ul>
-<li>Understanding: The programmer gets a clear image of what the program is supposed to do. </li>
-<li>Definition of Done: You are done when the all testcases succeed.</li>
-<li>Documentation: Testcases document univocally what the function does.</li>
-</ul>
-<p>We always start with trivial testcases: None, zero, one, two, the empty list, a list with one element.
-Testcases evolve in time.</p>
-
-</div>
-</div>
-</div>
 </div>
  
 

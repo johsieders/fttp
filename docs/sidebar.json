@@ -1,6 +1,7 @@
 {
   "fttp": {
     "Overview": "/",
+    "Title": "basics.html",
     "Warming Up": "warmingup.html",
     "Collections": "collections.html",
     "Functions": "functions.html",
