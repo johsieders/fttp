@@ -10,7 +10,7 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Title
+      title: Basics
       url: basics.html
     - output: web,pdf
       title: Warming Up
