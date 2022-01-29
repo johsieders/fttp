@@ -40,7 +40,7 @@ nb_path: "nbs\02_collections.ipynb"
 
 <span class="kn">from</span> <span class="nn">timeit</span> <span class="kn">import</span> <span class="n">timeit</span>
 <span class="kn">from</span> <span class="nn">fastcore.test</span> <span class="kn">import</span> <span class="n">test_eq</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">NewType</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
 </pre></div>
 
     </div>
@@ -249,9 +249,9 @@ number of occurrences of each x in xs.</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>histogram1   | 2.0918
-histogram2   | 3.2153
-histogram3   | 2.7428
+<pre>histogram1   | 1.4567
+histogram2   | 2.3046
+histogram3   | 1.8564
 </pre>
 </div>
 </div>
@@ -410,8 +410,8 @@ The result is a dictionary which contains for each keyword the set of pages wher
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>index        | 0.0393
-index1       | 0.0408
+<pre>index        | 0.0270
+index1       | 0.0269
 </pre>
 </div>
 </div>
@@ -457,7 +457,7 @@ index1       | 0.0408
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We start with a non-recursive solution. Start with an empty result.
+<p>We first consider a non-recursive solution. Start with an empty result.
 Let x and y be the next elements of xs and ys and assume x &lt;= y.
 Then x is appended to the result and replaced with the next element of xs.
 The algorithm stops if at least one of the lists is exhausted.</p>
@@ -584,8 +584,8 @@ is going to be the first element of the merged list to which you append the rest
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>merge        | 0.1208
-merge1       | 0.1279
+<pre>merge        | 0.0861
+merge1       | 0.0848
 </pre>
 </div>
 </div>
@@ -718,7 +718,7 @@ moves with n-1 instead of n in exactly the same way.</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>hanoi        | 0.8392
+<pre>hanoi        | 0.5125
 </pre>
 </div>
 </div>
