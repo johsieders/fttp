@@ -29,35 +29,251 @@ nb_path: "nbs\09_interpreters.ipynb"
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+
+<span class="k">def</span> <span class="nf">binary2nary</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">curry</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>  <span class="c1"># binds first arg</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">xs</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">,)</span> <span class="o">+</span> <span class="n">xs</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">rcurry</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>  <span class="c1"># binds last arg</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">xs</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">xs</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span><span class="p">,))</span>
+
+<span class="k">def</span> <span class="nf">flip</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>  <span class="c1"># flips args</span>
+
+<span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">x</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">negate</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">unary_and</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">and</span> <span class="n">q</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">unary_or</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">or</span> <span class="n">q</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Infix-to-postfix">Infix to postfix<a class="anchor-link" href="#Infix-to-postfix"> </a></h2><p>Iterables produce Iterators via <code>iter()</code> such as all Collections.
-Iterator yield the next element via <code>next()</code>. By convention, all Iterators
-are also Iterables; the standard implementation being to return self.
-Some examples:</p>
-<ul>
-<li><code>(0, 1, 2, 3)</code> is a tuple, no iterator</li>
-<li><code>range(4)</code> is a tuple, no iterator</li>
-<li><code>naturals()</code> is an iterator</li>
-<li><code>(1 / k for k in naturals())</code> is an iterator</li>
-</ul>
+<h2 id="Infix-to-postfix">Infix to postfix<a class="anchor-link" href="#Infix-to-postfix"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">brackets_ok</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param formula: a formula containing round brackets</span>
+<span class="sd">    :return: True if the brackets match</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bc</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1">## bracket count</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">formula</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;(&#39;</span><span class="p">:</span>
+            <span class="n">bc</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;)&#39;</span><span class="p">:</span>
+            <span class="n">bc</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">bc</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># bc must never be negative</span>
+                <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">bc</span> <span class="o">==</span> <span class="mi">0</span>  <span class="c1"># bc must be 0</span>
+
+<span class="k">def</span> <span class="nf">strip_brackets</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param formula: a formula</span>
+<span class="sd">    :return: formula without blanks and redundant outer brackets stripped</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">while</span> <span class="n">formula</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;(&#39;</span> <span class="ow">and</span> <span class="n">formula</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;)&#39;</span> <span class="ow">and</span> <span class="n">brackets_ok</span><span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">formula</span> <span class="o">=</span> <span class="n">formula</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">formula</span>
+
+<span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">operators</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param formula: an infix formula</span>
+<span class="sd">    :param operators: a dict of operators</span>
+<span class="sd">    :return:</span>
+<span class="sd">        a) the formula&#39;s first part</span>
+<span class="sd">        b) the innermost operator (lowest priority)</span>
+<span class="sd">        c) the formula&#39;s second part</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bracket_count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># counts brackets</span>
+    <span class="n">min_weight</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span>  <span class="c1"># weight of lowest priority op</span>
+    <span class="n">min_idx</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># index of this op</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">formula</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;(&#39;</span><span class="p">:</span>
+            <span class="n">bracket_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;)&#39;</span><span class="p">:</span>
+            <span class="n">bracket_count</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">operators</span><span class="p">:</span>
+            <span class="n">arity</span><span class="p">,</span> <span class="n">prio</span> <span class="o">=</span> <span class="n">operators</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="n">prio</span> <span class="o">+</span> <span class="n">bracket_count</span>
+            <span class="k">if</span> <span class="n">min_weight</span> <span class="o">&gt;=</span> <span class="n">w</span><span class="p">:</span>
+                <span class="n">min_weight</span><span class="p">,</span> <span class="n">min_idx</span> <span class="o">=</span> <span class="n">w</span><span class="p">,</span> <span class="n">i</span>
+    <span class="k">if</span> <span class="n">min_idx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># no operator</span>
+        <span class="k">return</span> <span class="n">formula</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">formula</span><span class="p">[:</span><span class="n">min_idx</span><span class="p">],</span> <span class="n">formula</span><span class="p">[</span><span class="n">min_idx</span><span class="p">],</span> <span class="n">formula</span><span class="p">[</span><span class="n">min_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="A-Simple-Grammar">A Simple Grammar<a class="anchor-link" href="#A-Simple-Grammar"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 1) arity (= 1 or 2) and</span>
+<span class="c1"># 2) priority (= 1, 2 or 3; 1 = low, 3 = high)</span>
+
+<span class="n">operators</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;+&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;~&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)}</span>
+<span class="c1"># print(split(formula, operators))</span>
+
+
+<span class="k">def</span> <span class="nf">infix2postfix</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">operators</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param formula: an infix formula</span>
+<span class="sd">    :param operators: a dictionary of operators</span>
+<span class="sd">    :return: formula as postfix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">formula</span> <span class="o">=</span> <span class="n">formula</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">formula</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">formula</span>
+    <span class="n">formula</span> <span class="o">=</span> <span class="n">strip_brackets</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">operators</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">op</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">formula</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="n">infix2postfix</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">operators</span><span class="p">)</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="n">infix2postfix</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">operators</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">left</span> <span class="o">+</span> <span class="n">right</span> <span class="o">+</span> <span class="n">op</span>
+
+<span class="c1"># formula = &quot;(((a) + (b - z)) + c) * d&quot;</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;a +~b-c * d + (z + ~t - ~u) &quot;</span>
+<span class="c1"># formula = &quot;a - b + c&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">infix2postfix</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">operators</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ab~+cd*-zt~+u~-+
+</pre>
+</div>
+</div>
 
 </div>
 </div>
+
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="A-simple-grammar">A simple grammar<a class="anchor-link" href="#A-simple-grammar"> </a></h2>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">namespace</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    translate a postfix-formula into an executable predicate</span>
+<span class="sd">    operators are AND, OR, NOT</span>
+<span class="sd">    namespace contains predicates</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">formula</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot;AND&quot;</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unary_and</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot;OR&quot;</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unary_or</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">token</span> <span class="o">==</span> <span class="s2">&quot;NOT&quot;</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">negate</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">namespace</span><span class="p">[</span><span class="n">token</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;bad formula&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">odd</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">even</span> <span class="o">=</span> <span class="n">negate</span><span class="p">(</span><span class="n">odd</span><span class="p">)</span>
+
+<span class="n">namespace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span> <span class="p">:</span> <span class="n">odd</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span> <span class="p">:</span> <span class="n">even</span><span class="p">}</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s1">&#39;a b AND&#39;</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>False
+</pre>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>todo</p>
+</div>
 
 </div>
 </div>
+
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Compiling-FORTH">Compiling FORTH<a class="anchor-link" href="#Compiling-FORTH"> </a></h2>
