@@ -43,8 +43,8 @@ entries:
       title: Intervals and Time Series
       url: intervals.html
     - output: web,pdf
-      title: Interpreters
-      url: interpreters.html
+      title: Title
+      url: forth.html
     output: web
     title: fttp
   output: web
