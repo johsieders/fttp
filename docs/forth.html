@@ -1,13 +1,13 @@
 ---
 
-title: A Forth Interpreter
+title: Interpreting Forth 
 
 
 keywords: fastai
 sidebar: home_sidebar
 
-
-
+summary: "A partial implementation of Forth "
+description: "A partial implementation of Forth "
 nb_path: "nbs\09_forth.ipynb"
 ---
 <!--
@@ -29,6 +29,29 @@ nb_path: "nbs\09_forth.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="How-to-Use-it">How to Use it<a class="anchor-link" href="#How-to-Use-it"> </a></h2><p>This is a partial implementation of Forth as described in the Forth Programmer's Handbook,
+Edward K. Conklin, Elizabeth D. Rather, Forth Inc,, 2007</p>
+<p>This how to use the interpreter:</p>
+<p><code>F = Forth()</code></p>
+<p><code>F(any legal Forth program)</code></p>
+<p><code>str(F) returns the stack</code></p>
+<p><code>F('.') returns the top of stack</code></p>
+<h3 id="A-simple-example:-Squaring">A simple example: Squaring<a class="anchor-link" href="#A-simple-example:-Squaring"> </a></h3><p><code>F('7 DUP *')  # 49</code></p>
+<p><code>F(': SQR ( a - a2 ) DUP * ; ')     # defines SQR</code></p>
+<p><code>F('7 SQR')                         # calls SQR on 7</code></p>
+<p><code>F(': SQR ( a - a2 ) DUP * ; 7 SQR')    # defines SQR and calls it</code></p>
+<h3 id="The-Euclidean-algorithm">The Euclidean algorithm<a class="anchor-link" href="#The-Euclidean-algorithm"> </a></h3><p><code>F(': GCD ( b a - gcd) BEGIN DUP -ROT MOD DUP NOT UNTIL DROP ;')</code>
+<code>F('80 90 GCD')            # returns 10</code></p>
+<p>The recursive version works quite as well</p>
+<p><code>F(': GCD ( b a - gcd) DUP -ROT MOD DUP IF GCD ELSE DROP THEN ;')</code></p>
+<h3 id="The-Horner-algorithm">The Horner algorithm<a class="anchor-link" href="#The-Horner-algorithm"> </a></h3><p><code>F(': HORNER ( a0 a1 .. an n x - p(x) ) SWAP DUP NOT IF DROP ELSE 0 DO DUP &gt;R * +  R&gt; LOOP THEN DROP ;')</code>
+<code>F('1 2 3 2 10 HORNER')    # computes p(10) = 1 + 2*10 + 3*100 = 321</code></p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
